@@ -2,22 +2,6 @@ environment:
 
   matrix:
     - TARGET_ARCH: x86
-      CONDA_PY: 27
-      CONDA_INSTALL_LOCN: C:\\Miniconda
-
-    - TARGET_ARCH: x64
-      CONDA_PY: 27
-      CONDA_INSTALL_LOCN: C:\\Miniconda-x64
-
-    - TARGET_ARCH: x86
-      CONDA_PY: 35
-      CONDA_INSTALL_LOCN: C:\\Miniconda35
-
-    - TARGET_ARCH: x64
-      CONDA_PY: 35
-      CONDA_INSTALL_LOCN: C:\\Miniconda35-x64
-
-    - TARGET_ARCH: x86
       CONDA_PY: 36
       CONDA_INSTALL_LOCN: C:\\Miniconda36
 
@@ -32,6 +16,7 @@ platform:
     - x64
 
 install:
+    - "%PYTHON%\\python.exe -m pip install wheel"
     # If there is a newer build queued for the same PR, cancel this one.
     - cmd: |
         powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/conda-forge/conda-forge-build-setup-feedstock/master/recipe/ff_ci_pr_build.py', 'ff_ci_pr_build.py')"
