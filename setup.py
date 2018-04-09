@@ -68,7 +68,7 @@ elif os.name == "nt":
     path = os.environ.get("LIB", "").split(";")
 
     libmatches = sum(
-        list(glob(os.path.join(p, "%s*.lib" % libname)) for p in path), []
+        list(glob(os.path.join(p, "*%s*.lib" % libname)) for p in path), []
     )
     library_dirs.append(os.path.dirname(libmatches[0]))
     libraries.append(os.path.splitext(os.path.basename(libmatches[0]))[0])
