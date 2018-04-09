@@ -1,71 +1,44 @@
 environment:
 
   matrix:
-    - TARGET_ARCH: x86
-      CONDA_PY: 36
-      CONDA_INSTALL_LOCN: C:\\Miniconda36
 
-    - TARGET_ARCH: x64
-      CONDA_PY: 36
-      CONDA_INSTALL_LOCN: C:\\Miniconda36-x64
+    # For Python versions available on Appveyor, see
+    # http://www.appveyor.com/docs/installed-software#python
+    # The list here is complete (excluding Python 2.6, which
+    # isn't covered by this document) at the time of writing.
 
-
-# We always use a 64-bit machine, but can build x86 distributions
-# with the TARGET_ARCH variable.
-platform:
-    - x64
+    - PYTHON: "C:\\Python36-x86"
 
 install:
-    - python.exe -m pip install wheel"
-    # If there is a newer build queued for the same PR, cancel this one.
-    - cmd: |
-        powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/conda-forge/conda-forge-build-setup-feedstock/master/recipe/ff_ci_pr_build.py', 'ff_ci_pr_build.py')"
-        ff_ci_pr_build -v --ci "appveyor" "%APPVEYOR_ACCOUNT_NAME%/%APPVEYOR_PROJECT_SLUG%" "%APPVEYOR_BUILD_NUMBER%" "%APPVEYOR_PULL_REQUEST_NUMBER%"
-        del ff_ci_pr_build.py
+  # We need wheel installed to build wheels
+  - "%PYTHON%\\python.exe -m pip install wheel cython numpy setuptools"
+  - cmd: set LIB=C:\Libraries\boost_1_66_0
 
-    # Cywing's git breaks conda-build. (See https://github.com/conda-forge/conda-smithy-feedstock/pull/2.)
-    - cmd: rmdir C:\cygwin /s /q
-
-    # Force input and output streams to flush immediately.
-    # Also use binary mode, which is sometimes needed on Windows.
-    - cmd: set PYTHONUNBUFFERED=1
-
-    # AppVeyor gives us 2 cores to work with.
-    #
-    # ref: https://www.appveyor.com/docs/build-environment/#build-vm-configurations
-    - cmd: set CPU_COUNT=2
-
-    # Use a small path for conda-build's working directory.
-    - cmd: set "CONDA_BLD_PATH=C:\\bld\\"
-
-    # Add path, activate `conda` and update conda.
-    - cmd: call %CONDA_INSTALL_LOCN%\Scripts\activate.bat
-    - cmd: conda.exe update --yes --quiet conda
-
-    # Configure conda.
-    - cmd: conda.exe config --set show_channel_urls true
-    - cmd: conda.exe config --set auto_update_conda false
-    - cmd: conda.exe config --set add_pip_as_python_dependency false
-
-    # Add our channels.
-    - cmd: conda.exe config --remove channels defaults
-    - cmd: conda.exe config --add channels defaults
-    - cmd: conda.exe config --add channels conda-forge
-
-    # Update and install everything.
-    - cmd: conda.exe update --all --quiet --yes
-    - cmd: conda.exe install --quiet --yes jinja2 conda-build
-
-    # Patch VS 2008 for 64-bit support.
-    - cmd: conda.exe install --quiet --yes vs2008_express_vc_python_patch
-    - cmd: call setup_x64
-
-    # Show info about conda install.
-    - cmd: conda.exe info
-    - cmd: conda.exe config --get
-
-# Skip .NET project specific build phase.
 build: off
 
 test_script:
-    - cmd: conda.exe build rank_filter.recipe --quiet
+  # Put your test command here.
+  # If you don't need to build C extensions on 64-bit Python 3.3 or 3.4,
+  # you can remove "build.cmd" from the front of the command, as it's
+  # only needed to support those cases.
+  # Note that you must use the environment variable %PYTHON% to refer to
+  # the interpreter you're using - Appveyor does not do anything special
+  # to put the Python version you want to use on PATH.
+  # - "%PYTHON%\\python.exe setup.py test"
+  - echo Skiping Tests
+
+after_test:
+  # This step builds your wheels.
+  # Again, you only need build.cmd if you're building C extensions for
+  # 64-bit Python 3.3/3.4. And you need to use %PYTHON% to get the correct
+  # interpreter
+  - "%PYTHON%\\python.exe setup.py bdist_wheel"
+
+artifacts:
+  # bdist_wheel puts your built wheel in the dist directory
+  - path: dist\*
+
+#on_success:
+#  You can use this step to upload your artifacts to a public website.
+#  See Appveyor's documentation for more details. Or you can simply
+#  access your wheels from the Appveyor "artifacts" tab for your build.
