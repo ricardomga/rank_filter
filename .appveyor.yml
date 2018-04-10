@@ -19,7 +19,7 @@ install:
   - cmd: set BOOST_LIBRARYDIR=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   - cmd: set CMAKE_LIBRARY_PATH=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   - cmd: set PYTHON_EXECUTABLE=C:\Python36\python.exe
-  - cmd: set PYTHON_LIBRARY_DIR=C:\Python36\lib\
+  - cmd: set PYTHON_LIBRARY_DIR=C:\Python36\libs\
   - cmd: echo %Boost_INCLUDE_DIRS%
   - cmd: cmake rank_filter .
 
