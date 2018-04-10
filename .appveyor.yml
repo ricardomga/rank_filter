@@ -11,17 +11,13 @@ environment:
 
 install:
   # We need wheel installed to build wheels
-  - cmd: dir
   - "%PYTHON%\\python.exe -m pip install --upgrade pip"
   - "%PYTHON%\\python.exe -m pip install wheel cython numpy setuptools"
-  - cmd: set PYTHONUNBUFFERED=1
+  #- cmd: set PYTHONUNBUFFERED=1
   - cmd: set LIB=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   - cmd: set BOOST_ROOT=C:\Libraries\boost_1_66_0\
   - cmd: set BOOST_LIBRARYDIR=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
-  - cmd: echo %CMAKE_LIBRARY_PATH%
   - cmd: set CMAKE_LIBRARY_PATH=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
-  #- cmd: echo %LIB%
-  - cmd: dir C:\Libraries\boost_1_66_0\
   - cmd: cmake .
 
 build: off
