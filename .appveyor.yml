@@ -15,7 +15,7 @@ install:
   - "%PYTHON%\\python.exe -m pip install wheel cython numpy setuptools"
   - cmd: set LIB=C:\Libraries\boost_1_66_0\stage\lib
   - cmd: echo %LIB%
-  - cmd: dir C:\Libraries\boost\ /s *.lib
+  - cmd: dir C:\Libraries\boost\stage
 
 build: off
 
