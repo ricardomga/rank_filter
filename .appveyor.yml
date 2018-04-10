@@ -10,6 +10,8 @@ environment:
     - PYTHON: "C:\\Python36"
 
 install:
+  - cmd: dir C:\Python36\
+  - cmd: dir C:\Python36\libs\
   # We need wheel installed to build wheels
   - "%PYTHON%\\python.exe -m pip install --upgrade pip"
   - "%PYTHON%\\python.exe -m pip install wheel cython numpy setuptools"
@@ -19,8 +21,8 @@ install:
   - cmd: set BOOST_LIBRARYDIR=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   - cmd: set CMAKE_LIBRARY_PATH=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   - cmd: set PYTHON_EXECUTABLE=C:\Python36\python.exe
+  - cmd: dir C:\Python36\libs\
   - cmd: set PYTHON_LIBRARY_DIR=C:\Python36\libs\
-  - cmd: echo %Boost_INCLUDE_DIRS%
   - cmd: cmake rank_filter .
 
 build: off
