@@ -21,7 +21,6 @@ install:
   - cmd: set CMAKE_PREFIX_PATH=C:\Libraries\boost_1_66_0\
   - cmd: set PYTHON_EXECUTABLE=C:\Python36\python.exe
   - cmd: set PYTHON_LIBRARY_DIR=C:\Python36\libs\python36.lib
-  - cmd: cmake .
 
 build: off
 
