@@ -18,9 +18,8 @@ install:
   - cmd: set BOOST_ROOT=C:\Libraries\boost_1_66_0\
   - cmd: set BOOST_LIBRARYDIR=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   - cmd: set CMAKE_LIBRARY_PATH=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
-  - cmd: set PYTHON_EXECUTABLE = C:\Python36
-  - cmd: dir C:\Python36
-  - cmd: cmake -DPYTHON_EXECUTABLE:FILEPATH=C:\Python36 .
+  - cmd: set PYTHON_EXECUTABLE=C:\Python36\python.exe
+  - cmd: cmake .
 
 build: off
 
