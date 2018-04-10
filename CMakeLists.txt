@@ -88,6 +88,8 @@ include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
+message(STATUS "** cenas ilegais -- " ${Boost_INCLUDE_DIRS}) 
+
 
 # Set all directories to search for libraries
 link_directories(${PYTHON_LIBRARY_DIR} ${Boost_LIBRARY_DIRS})
