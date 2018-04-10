@@ -19,7 +19,7 @@ install:
   - cmd: echo %CMAKE_LIBRARY_PATH%
   - cmd: set CMAKE_LIBRARY_PATH=C:\Libraries\boost_1_66_0\lib64-msvc-14.0\
   #- cmd: echo %LIB%
-  #- cmd: dir C:\Libraries\boost_1_66_0\
+  - cmd: dir C:\Libraries\boost_1_66_0\
 
 build: off
 
