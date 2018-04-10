@@ -13,9 +13,9 @@ install:
   # We need wheel installed to build wheels
   - "%PYTHON%\\python.exe -m pip install --upgrade pip"
   - "%PYTHON%\\python.exe -m pip install wheel cython numpy setuptools"
-  - cmd: set LIB=C:\Libraries\boost\lib32-msvc-12.0\
-  - cmd: set BOOST_ROOT=C:\Libraries\boost\
-  - cmd: set BOOST_LIBRARYDIR=C:\Libraries\boost\lib32-msvc-12.0\
+  - cmd: set LIB=C:\Libraries\boost_1_66_0\lib32-msvc-12.0\
+  - cmd: set BOOST_ROOT=C:\Libraries\boost_1_66_0\
+  - cmd: set BOOST_LIBRARYDIR=C:\Libraries\boost_1_66_0\lib32-msvc-12.0\
   #- cmd: echo %LIB%
   #- cmd: dir C:\Libraries\boost\lib32-msvc-12.0\
 
